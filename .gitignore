@@ -1,0 +1,30 @@
+## .NET
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+.idea/
+*.swp
+TestResults/
+[Tt]est[Rr]esult*/
+coverage*.json
+coverage*.xml
+*.trx
+publish/
+*.nupkg
+artifacts/
+
+## Banco SQLite local (recriado automaticamente com seed)
+*.db
+*.db-shm
+*.db-wal
+
+## SO
+.DS_Store
+Thumbs.db

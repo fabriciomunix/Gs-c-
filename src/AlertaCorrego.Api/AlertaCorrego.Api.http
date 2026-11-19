@@ -1,0 +1,68 @@
+@api = http://localhost:5080
+
+### Listar córregos
+GET {{api}}/api/corregos
+
+### Status do Córrego Ponte Baixa
+GET {{api}}/api/corregos/1/status
+
+### Estatísticas das últimas 24 h
+GET {{api}}/api/corregos/1/estatisticas?horas=24
+
+### Registrar leitura CRÍTICA (gera alerta + lista de prioritários)
+POST {{api}}/api/leituras
+Content-Type: application/json
+
+{
+  "sensorId": 1,
+  "nivelAguaCm": 185,
+  "chuvaMmHora": 48
+}
+
+### Registrar leitura NORMAL
+POST {{api}}/api/leituras
+Content-Type: application/json
+
+{
+  "sensorId": 2,
+  "nivelAguaCm": 40,
+  "chuvaMmHora": 2
+}
+
+### Últimas leituras do córrego 1
+GET {{api}}/api/leituras?corregoId=1&limite=10
+
+### Moradores prioritários do córrego 1
+GET {{api}}/api/moradores/prioritarios?corregoId=1
+
+### Cadastrar morador (dados fictícios)
+POST {{api}}/api/moradores
+Content-Type: application/json
+
+{
+  "nome": "Morador Teste (fictício)",
+  "telefone": "(11) 90000-0099",
+  "endereco": "Rua Fictícia, 99 - M'Boi Mirim",
+  "corregoId": 1,
+  "prioritario": false,
+  "tipoNecessidade": "CADEIRANTE"
+}
+
+### Alertas ativos
+GET {{api}}/api/alertas?ativos=true
+
+### Encerrar alerta
+PATCH {{api}}/api/alertas/2/encerrar
+
+### Erro de validação (nível crítico <= nível de alerta) → 400
+POST {{api}}/api/corregos
+Content-Type: application/json
+
+{
+  "nome": "Córrego Inválido",
+  "bairro": "Teste",
+  "latitude": -23.6,
+  "longitude": -46.7,
+  "nivelAlertaCm": 150,
+  "nivelCriticoCm": 100
+}
